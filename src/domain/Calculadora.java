@@ -198,6 +198,7 @@ public class Calculadora {
 		int valor=128;
 		int v=0;
 		
+		
 		for(int i=0; i<mask.length(); i++){
 			
 			
@@ -220,21 +221,19 @@ public class Calculadora {
 		
 		return broadcast;
 	}
+	
 	public void setBroadcast(String broadcast) {
 		this.broadcast = broadcast;
 	}
+	
 	public String getRede() {
 		return rede;
 	}
+	
 	public void setRede(String rede) {
 		this.rede = rede;
 	}
-	public List<String> getIpsValidos() {
-		return ipsValidos;
-	}
-	public void setIpsValidos(List<String> ipsValidos) {
-		this.ipsValidos = ipsValidos;
-	}
+	 
 		
 	public int getCIRD(){
 		
@@ -305,5 +304,29 @@ public class Calculadora {
 		
 		return realIP;
 	}
+	public String getLastIP(){
+		
+		String ip = getBroadcast();
+		ip = splitIP(ip);
+		int aux = Integer.parseInt(ip.split("##")[3]);
+		String a[] = ip.split("##");
+		String realIP = "";
+		String b;
+		for(int i=0; i<a.length -1; i++){
+			b = a[i];	
+			realIP+=b+".";
+			
+		}
+		
+		realIP+= ""+(aux -1);
+		
+		
+		
+		return realIP;
+				
+	}
+	
+	
+	
 	
 }
