@@ -64,7 +64,6 @@ public class Calculadora {
 
 	}
 
-
 	
 	public Calculadora(String mascara, String ip) {
 		this.mascara = mascara;
@@ -145,8 +144,7 @@ public class Calculadora {
 		}
 		return ok;
 	}
-	
-	
+		
 	public String getMascara() {
 				
 		
@@ -226,13 +224,7 @@ public class Calculadora {
 		this.broadcast = broadcast;
 	}
 	
-	public String getRede() {
-		return rede;
-	}
 	
-	public void setRede(String rede) {
-		this.rede = rede;
-	}
 	 
 		
 	public int getCIRD(){
@@ -275,8 +267,7 @@ public class Calculadora {
 		
 		
 	}
-	
-	
+		
 	public String getFirstIP(){
 		
 		String mask = getMascara();
@@ -327,6 +318,49 @@ public class Calculadora {
 	}
 	
 	
+	public int getSubNet(){
+		String mask = getMascara();
+		mask = dec2Bin(mask);
+
+		System.out.println(mask);
+		mask = splitIP(mask);
+		String octetos[] = mask.split("##");
+		int countOcteto=0;
+		int count=0;
+		
+		
+		
+		for(int i=0; i<octetos.length; i++){
+			
+			for(int j=0; j<octetos[i].length(); j++){
+				if(octetos[i].charAt(j)== '1'){
+					countOcteto++;
+				}
+				
+			}
+			
+			if(countOcteto <8){
+				
+				for(int k=0; k< octetos[i].length(); k++){
+					
+					if(octetos[i].charAt(k)== '1'){
+						
+						count++;
+					}
+					
+				}
+				
+			}
+			
+			countOcteto = 0;
+		}
+		
+		System.out.println(count);
+		
+		return (int) Math.pow(2, count);
+		
+				
+	}
 	
 	
 }
