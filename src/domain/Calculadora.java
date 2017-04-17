@@ -164,6 +164,60 @@ public class Calculadora {
 		this.ip = ip;
 	}
 	public String getBroadcast() {
+	
+		String mask = getMascara();
+		mask = dec2Bin(mask);
+		String ip = getIp();
+		ip= splitIP(ip);
+		String split[] = ip.split("##");
+		int count =0;
+		int index =0;
+		String realIP="";
+		
+		for(int i=0; i<mask.length(); i++){
+			
+			if(mask.charAt(i)== '1'){
+				count++;
+				if(count ==8){
+					
+					realIP += ""+split[index]+".";
+					index++;
+					count =0;
+				}
+			}
+			
+		}
+		
+		
+		
+		
+		mask = getMascara();
+		mask = dec2Bin(mask);
+		mask = splitIP(mask);
+		mask= mask.split("##")[3];
+		int valor=128;
+		int v=0;
+		
+		for(int i=0; i<mask.length(); i++){
+			
+			
+			if(mask.charAt(i)== '0'){
+				
+				v+= valor ;
+				
+				
+			} 
+				
+				valor = valor /2;
+			 
+			
+						
+		}
+		
+		
+		broadcast = realIP+ (String.valueOf(v));
+
+		
 		return broadcast;
 	}
 	public void setBroadcast(String broadcast) {
@@ -182,7 +236,74 @@ public class Calculadora {
 		this.ipsValidos = ipsValidos;
 	}
 		
+	public int getCIRD(){
+		
+		String mask = getMascara();
+		mask = dec2Bin(getMascara());
+		
+		int count =0;
+		for(int i=0; i<mask.length(); i++){
+			
+			if(mask.charAt(i) == '1'){
+				
+				count++;
+			}
+			
+		}
+		
+		return count;
+		
+		
+	}
+	
+	public int getHost(){
+		
+		String mask = getMascara();
+		mask = dec2Bin(mask);
+		int count = 0;
+		for(int a=0; a<mask.length(); a++){
+			
+			if(mask.charAt(a) == '0'){
+				
+				count++;
+			}
+			
+		}
+		
+		 
+		return (int) (Math.pow(  2, count) -2);
+
+		
+		
+	}
 	
 	
+	public String getFirstIP(){
+		
+		String mask = getMascara();
+		mask = dec2Bin(mask);
+		String ip = getIp();
+		ip= splitIP(ip);
+		String split[] = ip.split("##");
+		int count =0;
+		int index =0;
+		String realIP="";
+		for(int i=0; i<mask.length(); i++){
+			
+			if(mask.charAt(i)== '1'){
+				count++;
+				if(count ==8){
+					
+					realIP += ""+split[index]+".";
+					index++;
+					count =0;
+				}
+			}
+			
+		}
+		realIP+= "0";
+		
+		return realIP;
+	}
 	
 }
